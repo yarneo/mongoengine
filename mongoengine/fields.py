@@ -1031,11 +1031,7 @@ class CachedReferenceField(BaseField):
 
     def to_python(self, value):
         if isinstance(value, dict):
-            collection = self.document_type._get_collection_name()
-            value = DBRef(
-                collection, self.document_type.id.to_python(value['_id']))
-            return self.document_type._from_son(self.document_type._get_db().dereference(value))
-
+            return self.document_type._from_son(value)
         return value
 
     @property
